@@ -1,0 +1,59 @@
+//SET TWO DIMENSIONAL ARRAY TO 19 X 19
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        char[][] phutboard = new char[19][19];
+        
+
+        //INITIALIZE THE BOARD
+        for (int row = 0; row < phutboard.length; row++) {
+            for (int col = 0; col < phutboard[row].length; col++) {
+                phutboard[row][col] = '.';
+            }
+            System.out.println();
+        }
+
+        //DISPLAY THE BOARD
+        String option;
+        boolean finished = false;
+        while (!finished) {
+            for (int row = 0; row < phutboard.length; row++) {
+                for (int col = 0; col < phutboard[row].length; col++) {
+                    System.out.print(phutboard[row][col]);
+                }
+                System.out.println();
+                
+                
+                //GET USER TO ENTER COMMAND
+                System.out.print("Enter command: ");
+                String command = scanner.next();
+                if (command.equals("PUT")) {
+                    String wordToAdd = scanner.nextLine();
+
+                    System.out.print("Type in command where to place black stone>");
+                    option = scanner.nextLine();
+                    String[] optArray = option.split(" +");
+                    if (optArray.length >= 1) {
+                        String cmd = optArray[0];
+
+                        System.out.println("You are trying to add " + wordToAdd);
+                    } else if (command.equals("JUMP")) {
+
+                    } else if (command.equals("PASS")) {
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+
+                        System.out.println("You are trying to remove the element at index " + index);
+
+                    } else if (command.equals("QUIT")) {
+                        finished = true;
+                    } else {
+                        System.out.println("I don't understand that command");
+                    }
+
+                }
+
+            }
+
+        }
+    }
+}
