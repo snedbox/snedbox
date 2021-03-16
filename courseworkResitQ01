@@ -1,0 +1,117 @@
+public class ResitForCoursework01 {
+
+    //SET TWO DIMENSIONAL ARRAY TO 19 X 19
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        char[][] phutboard = new char[19][19];
+
+        //INITIALIZE THE BOARD
+        for (int row = 0; row < phutboard.length; row++) {
+            for (int col = 0; col < phutboard[row].length; col++) {
+                phutboard[row][col] = '.';
+            }
+            System.out.println();
+        }
+
+        //DISPLAY THE BOARD
+        String option;
+        boolean finished = false;
+        while (!finished) {
+            for (int row = 0; row < phutboard.length; row++) {
+                for (int col = 0; col < phutboard[row].length; col++) {
+                    System.out.print(phutboard[row][col]);
+                }
+                System.out.println();
+
+            }
+            //GET USER TO ENTER COMMAND
+            System.out.print("Enter command: ");
+            String command = scanner.next();
+            if (command.equals("PUT")) {
+                String wordToAdd = scanner.nextLine();
+                put();
+                System.out.print("Type in command where to place black stone>");
+                option = scanner.nextLine();
+                String[] optArray = option.split(" +");
+                if (optArray.length >= 1) {
+                    String cmd = optArray[0];
+
+                    System.out.println("You are trying to add " + wordToAdd);
+                } else if (command.equals("JUMP")) {
+                    jump();
+                }
+
+            } else if (command.equals("PASS")) {
+                int index = scanner.nextInt();
+                scanner.nextLine();
+                pass();
+                System.out.println("You are trying to remove the element at index " + index);
+
+            } else if (command.equals("QUIT")) {
+                finished = true;
+            } else {
+                System.out.println("I don't understand that command");
+            }
+
+        }
+            
+            
+
+    
+
+    
+
+    public static void put() {
+
+        string thisPlayer = 'Top'
+        ;
+        boolean finished = false;
+        while (!finished) {
+            //Display the board
+            for (int row = 0; row < phutboard.length; row++) {
+                for (int col = 0; col < phutboard[row].length; col++) {
+                    System.out.print(phutboard[row][col]);
+                }
+                System.out.println();
+            }
+
+            System.out.println("Character to be placed is " + top);
+            System.out.print("Enter the row at which you wish to place it> ");
+            int placeRow = scanner.nextInt();
+            if (placeRow > 19 || placeRow < 0) {
+                System.out.print("Row has to be less then 19 or more then 0");
+            };
+            System.out.print("Enter the column at which you wish to place it> ");
+            int placeCol = scanner.nextInt();
+            if (placeCol > 19 || placeCol < 0) {
+                System.out.print("Column has to be less then 19 or more then 0");
+            };
+            phutboard[placeRow][placeCol] = top;
+        }
+
+        thisPlayer = (thisPlayer == 'Top') ? 'Bottom': 'Top'
+
+    
+
+    ;
+           
+    }
+            public static void jump() {
+        System.out.print("Enter the row at which you wish to jump to> ");
+    }
+    if (Phutboard 
+    [i][j
+    ] instanceof Top
+
+    
+        ) {
+            if (j + 1 < Phutboard.length) {
+            Phutboard[i][j + 1] = Phutboard[i][j];
+            Phutboard[i][j] = null;
+        }
+    }
+}
+
+public static void pass() {
+    }
+}
