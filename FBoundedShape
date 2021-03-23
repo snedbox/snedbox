@@ -1,0 +1,29 @@
+public interface FBoundedShape extends FShape {
+
+    /**
+     * Get left margin of the box.
+     *
+     * @return left margin of the box
+     */
+
+    int getLeftBound();
+
+    /**
+     * Get right margin of the box.
+     *
+     * @return right margin of the box
+     */
+    int getRightBound();
+
+    /*
+     * Get top margin of the box.
+     * @return top margin of the box
+     */
+    int getTopBound();
+
+    /**
+     * Get bottom margin of the box.
+     * @return bottom margin of the box
+     */
+    int getBottomBound();
+}
