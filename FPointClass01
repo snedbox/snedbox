@@ -1,0 +1,52 @@
+public class FPointClass01 extends FShapeClass01 implements FPoint {
+
+    private int x;
+    private int y;
+
+    public FPointClass01(int x, int y, char foreground) {
+        super(foreground);
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public boolean contains(int x, int y) {
+        return x == getX() && y == getY();
+    }
+
+    @Override
+    public FShape translate(double x, double y) {
+        return FShapeUtils01.translate(this.getX(), this.getY(), x, y, getForeground());
+    }
+
+    @Override
+    public FShape reflectAboutVerticalAxis(double xIntercept) {
+        return FShapeUtils01.reflectAboutVerticalAxis(this.getX(), this.getY(), xIntercept, 
+                getForeground());
+    }
+
+    @Override
+    public FShape reflectAboutHorizontalAxis(double yIntercept) {
+        return FShapeUtils01.reflectAboutHorizontalAxis(this.getX(), this.getY(), yIntercept, 
+                getForeground());
+    }
+
+    @Override
+    public FShape rotateHalfTurn(double xPivot, double yPivot) {
+                return FShapeUtils01.rotateHalfTurn(this.getX(), this.getY(), xPivot,yPivot,
+                getForeground());
+    }
+
+    
+    
+}
