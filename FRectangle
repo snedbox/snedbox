@@ -1,0 +1,43 @@
+/**
+ *
+ * Interface to be implemented by objects representing rectangles. The rectangle
+ * is defined by two corners. These can be any two diagonally opposite corners
+ */
+public interface FRectangle extends FBoundedShape {
+
+    /**
+     * Get the column coordinate of the first corner of the rectangle
+     *
+     * @return column coordinate of the first corner of the rectangle
+     */
+    int getX1();
+
+    /**
+     * Get the column coordinate of the first corner of the rectangle
+     *
+     * @return column coordinate of the first corner of the rectangle
+     */
+    int getY1();
+
+    /**
+     * Get the column coordinate of the second corner of the rectangle
+     *
+     * @return column coordinate of the second corner of the rectangle
+     */
+    int getX2();
+
+    /**
+     * Get the row coordinate of the second corner of the rectangle
+     *
+     * @return row coordinate of the second corner of the rectangle
+     */
+    int getY2();
+
+    /**
+     * Set 'X' character to fill rectangle shape from above coordinates
+     *
+     * @return ??
+     */
+    @Override
+    char getForeground();
+}
