@@ -1,0 +1,18 @@
+/**
+ *Interface to be represented by objects representing dots, i.e. single
+ * characters situated at a cell in the canvas
+ */
+public interface FPoint extends FShape {
+
+    /**
+     * Get the column on which the point is situated
+     * @return the column on which the point is situated
+     */
+    int getX();
+    
+    /**
+     * Get the row on which the point is situated
+     * @return the row on which the point is situated
+     */
+    int getY();
+}
