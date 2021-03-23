@@ -1,0 +1,55 @@
+/**
+ *
+ * An object that implements this interface acts as a rectangular canvas
+ * to which shapes can be added. The canvas has a width and height, and it is
+ * assumed that when it is displayed only the parts of shapes that fall inside
+ * the canvas get displayed.
+ * 
+ * The canvas has a "background" character, which is displayed on those parts
+ * of the canvas that are not overlapped by shapes.
+ */
+public interface FCanvas {
+    /**
+     * Get the width of the canvas
+     * @return width of the canvas
+     */
+    int getWidth();
+    
+    /**
+     * Get the height of the canvas
+     * @return height of the canvas 
+     */
+    int getHeight();
+    
+    /**
+     * Get the background character
+     * @return background character
+     */
+    char getBackground();
+    
+    /**
+     * Get the number of shapes that this canvas contains
+     * @return number of shapes contained by the canvas
+     */
+    int getNbrShapes();
+    
+    /**
+     * Get the i'th shape in the canvas. It should be assumed that shapes are
+     * stored in a way that represents their z-order. That is to say that if the
+     * the shape returned by getShape(1) overlapped that returned by getShape(2)
+     * then it would be the second shape that we would see in the area of the
+     * overlap.
+     * @param i index of the shape
+     * @return the i'th shape
+     */
+    FShape getShape(int i);
+    
+    /**
+     * Add a shape to the canvas. It is assumed that this shape will be at the
+     * top of the z-order. In other words, when the canvas is displayed, it
+     * appears on top of any other shapes.
+     * 
+     * @param shape shape to be added
+     */
+    void addShape(FShape shape);
+}
