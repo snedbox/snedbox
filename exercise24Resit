@@ -1,0 +1,28 @@
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int weight;
+        System.out.print("Enter weight of package in grams>");
+        weight = scanner.nextInt();
+        if (weight > 2000) {
+            System.out.print("Your package is above the allowed weight");
+        }
+
+        int width, length, depth;
+        System.out.print("Enter width of package>");
+        width = scanner.nextInt();
+        System.out.print("Enter length of package>");
+        length = scanner.nextInt();
+        System.out.print("Enter depth of package>");
+        depth = scanner.nextInt();
+
+        int volume;
+        volume = width + length + depth;
+        if (volume > 90) {
+            System.out.print("Your parcel is too large");
+        } else {
+            System.out.println("Your package can be sent as a small parcel");
+        }
+
+    }
+}
