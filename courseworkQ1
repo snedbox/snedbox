@@ -1,0 +1,144 @@
+static String[] numbers = {"19", "18", "17", "16", "15", "14", "13", "12", "11", "10", " 9", " 8", " 7", " 6", " 5", " 4", " 3", " 2", " 1"};
+
+    static String[] letters = {"  ", " A", " B", " C", " D", " E", " F", " G", " H", " I", " J", " K", " L", " M", " N", " O", " P", " Q", " R", " S"};
+
+    //GAME START
+    static String[][] phutboard = new String[20][20];
+    static String thisPlayer = "TOP>";
+    static boolean continueGame = true;
+    static int rowWhiteStone = 10;
+    static char colWhiteStone = 'I';
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        setBoard();
+        putWhiteStone(rowWhiteStone, colWhiteStone);
+        displayBoard();
+
+        while (continueGame) {
+            System.out.print(thisPlayer);
+            String action = scanner.next();
+            switch (action) {
+                case "PUT":
+                    String placePlayer = scanner.next();
+
+                    //START POSITION
+                    put(placePlayer);
+                    break;
+
+                case "PASS":
+                    changePlayer();
+                    break;
+                case "QUIT":
+                    continueGame = false;
+                    break;
+                default:
+                    break;
+            }
+
+            System.out.println();
+        }
+
+    }
+
+    public static void put(String position) {
+        //READ LETTER
+        char alphabet = position.charAt(0);
+
+        //READ NUMBER
+        int number = Integer.parseInt(position.substring(1));
+
+        int row = mappingRow(number);
+        int col = mappingColumn(alphabet);
+
+        if (number < 20 && number > 0 && !phutboard[row][col].equals(" *") && !phutboard[row][col].equals(" @")) {
+            phutboard[row][col] = " *";
+            //CHANGE TURN
+            changePlayer();
+            //DISPLAY
+            displayBoard();
+        } else {
+            System.out.println("This command is not legal!");
+            return;
+        }
+
+    }
+
+    public static void putWhiteStone(int row, char col) {
+        int mappedrow = mappingRow(row);
+        int mappedcol = mappingColumn(col);
+        phutboard[mappedrow][mappedcol] = " @";
+    }
+
+    public static int mappingColumn(char alphabet) {
+        int mappedColumn = -1;
+        for (int index = 1; index < letters.length; index++) {
+            char innerAlphabet = letters[index].charAt(1);
+            if (alphabet == innerAlphabet) {
+                mappedColumn = index;
+                break;
+            }
+        }
+
+        return mappedColumn;
+    }
+
+    public static int mappingRow(int number) {
+        int mappedRow = 19 - number;
+
+        //MAP RESULT
+        if (mappedRow > 19 || mappedRow < 0) {
+            mappedRow = -1;
+        }
+        return mappedRow;
+    }
+
+    public static void changePlayer() {
+        switch (thisPlayer) {
+            case "TOP>":
+                thisPlayer = "BOTTOM>";
+                break;
+            case "BOTTOM>":
+                thisPlayer = "TOP>";
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    public static void setBoard() {
+        int indexNumbers = 0;
+        int indexLetters = 0;
+        for (int row = 0; row < 20; row++) {
+
+            if (row == 19) {
+                for (int col = 0; col < 20; col++) {
+                    phutboard[row][col] = letters[indexLetters];
+                    indexLetters++;
+                }
+                return;
+            }
+
+            for (int col = 0; col < 20; col++) {
+                if (col == 0) {
+                    phutboard[row][col] = numbers[indexNumbers];
+                    indexNumbers++;
+                } else {
+                    phutboard[row][col] = " .";
+                }
+            }
+
+        }
+    }
+
+    public static void displayBoard() {
+        for (int row = 0; row < phutboard.length; row++) {
+            for (int col = 0; col < phutboard[0].length; col++) {
+                System.out.print(phutboard[row][col]);
+            }
+            System.out.println();
+        }
+    }
+
+}
