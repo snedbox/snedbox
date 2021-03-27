@@ -2,9 +2,10 @@ public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // DECLARE VARIABLES
         int weight, width, length, depth, volume;
+        boolean smallParcel = false;
 
         // GET INPUT DETAILS OF PACKAGE
-        System.out.print("Enter weight of package in grams>");
+        System.out.print("Enter weight of package in grams (2000 max)>");
         weight = scanner.nextInt();
 
         System.out.print("Enter width of package>");
@@ -19,16 +20,10 @@ public static void main(String[] args) {
         volume = width + length + depth;
 
         // CHECK CONDITIONS ARE CORRECT
-        if (weight > 2000) {
-            System.out.print("Your parcel weighs above 2000 grams");
-        }
-
-        if (volume > 90) {
-            System.out.print("Your package does not qualify as a small parcel");
-        }
-
-        if (width > 60 || length < 60 || depth < 60) {
-            System.out.print("The maximum dimension allowed is 60cm");
+        if (smallParcel == weight > 2000 || volume > 90 || width > 60 || length > 60 || depth > 60) {
+            System.out.print("Your parcel does not meet the allowed dimensions");
+            {
+            }
         } else {
             System.out.print("Your package can be sent as a small parcel");
         }
