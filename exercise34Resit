@@ -1,15 +1,18 @@
-class NoughtCrossStart {
+public class NaughtsCrossesForResit {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         // declare and intitialise the board
         char[][] board = new char[3][3];
+        boolean continueGame = true;
 
         // initialise all the elements to '.' we use this to indicate that a 
         // square is empty, because a space character would not be visible
         for (int row = 0; row < board.length; row++) {
             for (int col = 0; col < board[row].length; col++) {
                 board[row][col] = '.';
+                
+                
             }
         }
 
@@ -31,10 +34,19 @@ class NoughtCrossStart {
             int placeRow = scanner.nextInt();
             System.out.print("Enter the column at which you wish to place it> ");
             int placeCol = scanner.nextInt();
-               if (placeRow <0 || placeRow >2 || placeCol <0 || placeCol >2 || board[row][col].equals("X") || board[row][col].equals("O")){
-                   finished = true;}
             board[placeRow][placeCol] = thisPlayer;
+
             // If the last character placed was 'X' then the next must be 'O'
             // and vice versa
             thisPlayer = (thisPlayer == 'X') ? 'O' : 'X';
+
+            if (placeCol > 2 || placeCol < 0 || placeRow > 2 || placeRow < 0) {
+                continueGame = false;
+            }
+            if (continueGame) {
+                System.out.print("This game is finished");
+            }
+
         }
+    }
+}
