@@ -1,0 +1,182 @@
+public class FriezeCode01 {
+
+    private static Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        char[][] motif = null;
+        String option;
+        do {
+            System.out.print("Your option (type MENU to see the menu)>");
+            option = scan.nextLine();
+            String[] optArray = option.split(" +");
+            if (optArray.length >= 1) {
+                String cmd = optArray[0];
+                if (cmd.equalsIgnoreCase("NEW")) {
+                    motif = newMotif(optArray);
+                } else if (cmd.equalsIgnoreCase("DOT")) {
+                    addDot(motif, optArray);
+                } else if (cmd.equalsIgnoreCase("REC")) {
+                    addRectangle(motif, optArray);
+                } else if (cmd.equalsIgnoreCase("TRI")) {
+                    addTriangle(motif, optArray);
+                } else if (cmd.equalsIgnoreCase("FRI")) {
+                    printFrieze(motif, optArray);
+                } else if (cmd.equalsIgnoreCase("MENU")) {
+                    menu();
+                } else if (!cmd.equalsIgnoreCase("QUIT")) {
+                    System.out.println("Invalid option");
+                }
+            }
+        } while (!option.equalsIgnoreCase("QUIT"));
+    }
+
+    private static void fillArray(char[][] array, char fillChar) {
+        for (int row = 0; row < array.length; row++) {
+            char[] rowArray = array[row];
+            for (int col = 0; col < rowArray.length; col++) {
+                rowArray[col] = fillChar;
+            }
+        }
+    }
+
+    private static void menu() {
+        System.out.println("Options are:");
+        System.out.println("NEW <NbrColumns> <NbrRows> <Char> - Create a "
+                + "new motif with dimensions <NbrColumns> by <NbrRows> filled "
+                + "with character <Char>.");
+        System.out.println();
+
+        System.out.println("DOT <Col> <Rows> <Char>\n"
+                + "Write character <Char> into the cell at column <Col> "
+                + "and row <Row> ");
+        System.out.println();
+
+        System.out.println("REC <Col1> <Row1> <Col2> <Row2> <Char>\n - Fill a "
+                + "rectangle with character <Char>. The corners of the rectangle "
+                + "are at <Col1> <Row1> and <Col2> <Row2> ");
+        System.out.println();
+
+        System.out.println("TRI <Col1> <Row1> <Col2> <Row2> <Char> - "
+                + "Fill a right angled triangle with character <Char>. "
+                + "The right angle is at <Col1>, <Row1> and the sides extend"
+                + "to <Col2> and <Row2> ");
+        System.out.println();
+
+        System.out.println("FRI <N> Print out a frieze by repeating the motif "
+                + "<N> times");
+        System.out.println();
+
+        System.out.println("QUIT - Exit the application");
+    }
+
+    private static char[][] newMotif(String[] optArray) {
+        char[][] motif = null;
+
+        int nbrCols = Integer.parseInt(optArray[1]);
+        int nbrRows = Integer.parseInt(optArray[2]);
+        char backgroundCharacter = getCharFromArray(optArray, 3);
+        motif = new char[nbrRows][nbrCols];
+        fillArray(motif, backgroundCharacter);
+        return motif;
+    }
+
+    private static void addRectangle(char[][] motif, String[] optArray) {
+        if (motif == null) {
+            System.out.println("No motif has been created");
+        } else {
+
+            int col1 = Integer.parseInt(optArray[1]);
+            int row1 = Integer.parseInt(optArray[2]);
+            int col2 = Integer.parseInt(optArray[3]);
+            int row2 = Integer.parseInt(optArray[4]);
+            char fillChar = getCharFromArray(optArray, 5);
+
+            int firstRow = Math.min(row1, row2);
+            int lastRow = Math.max(row1, row2);
+            int firstCol = Math.min(col1, col2);
+            int lastCol = Math.max(col1, col2);
+
+            for (int row = firstRow; row <= lastRow; row++) {
+                for (int col = firstCol; col <= lastCol; col++) {
+                    if (row >= 0 && row < motif.length
+                            && col >= 0 && col < motif[row].length) {
+                        motif[row][col] = fillChar;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void addTriangle(char[][] motif, String[] optArray) {
+        if (motif == null) {
+            System.out.println("No motif has been created");
+        } else {
+            int col1 = Integer.parseInt(optArray[1]);
+            int row1 = Integer.parseInt(optArray[2]);
+            int col2 = Integer.parseInt(optArray[3]);
+            int row2 = Integer.parseInt(optArray[4]);
+            char fillChar = getCharFromArray(optArray, 5);
+
+            int firstRow = Math.min(row1, row2);
+            int lastRow = Math.max(row1, row2);
+            int firstCol = Math.min(col1, col2);
+            int lastCol = Math.max(col1, col2);
+
+            for (int row = firstRow; row <= lastRow; row++) {
+                for (int col = firstCol; col <= lastCol; col++) {
+                    double cNorm = (double) (col - col1) / (col2 - col1);
+                    double rNorm = (double) (row - row2) / (row1 - row2);
+
+                    if (row >= 0 && row < motif.length
+                            && col >= 0 && col < motif[row].length
+                            && cNorm <= rNorm) {
+                        motif[row][col] = fillChar;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void addDot(char[][] motif, String[] optArray) {
+        if (motif == null) {
+            System.out.println("No motif has been created");
+        } else {
+            int col = Integer.parseInt(optArray[1]);
+            int row = Integer.parseInt(optArray[2]);
+            char fillChar = getCharFromArray(optArray, 3);
+
+            if (row >= 0 && row < motif.length
+                    && col >= 0 && col < motif[row].length) {
+                motif[row][col] = fillChar;
+            }
+
+        }
+    }
+
+    private static void printArray(char[][] array, int horizRepeats) {
+        for (int row = 0; row < array.length; row++) {
+            char[] rowArray = array[row];
+            for (int horizRepeatNo = 0; horizRepeatNo < horizRepeats;
+                    horizRepeatNo++) {
+                for (int col = 0; col < rowArray.length; col++) {
+                    System.out.print(rowArray[col]);
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    private static void printFrieze(char[][] motif, String[] optArray) {
+        if (motif == null) {
+            System.out.println("No motif has been created");
+        } else {
+            int horizRepeats = Integer.parseInt(optArray[1]);
+            printArray(motif, horizRepeats);
+        }
+    }
+
+    private static char getCharFromArray(String[] optArray, int i) {
+        return optArray.length > i ? optArray[i].charAt(0) : ' '; //To change body of generated methods, choose Tools | Templates.
+    }
+
+}
